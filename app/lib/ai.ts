@@ -38,9 +38,15 @@ async function createCompletionWithFallback(
       });
       console.log(`✅ Success with model: ${model}`);
       return completion;
-    } catch (error: any) {
-      console.error(`❌ Failed with model ${model}:`, error.message);
-      // thử model tiếp theo
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(`❌ Failed with model ${model}:`, {
+          message: error.message,
+          stack: error.stack,
+        });
+      } else {
+        console.error(`❌ Failed with model ${model}:`, error);
+      }
     }
   }
 
@@ -132,8 +138,13 @@ export async function generateExpenseInsights(
       action: insight.action,
       confidence: insight.confidence || 0.8,
     }));
-  } catch (error) {
-    console.error("❌ Error generating AI insights:", error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("❌ Error generating AI insights:", error.message);
+    } else {
+      console.error("❌ Error generating AI insights:", error);
+    }
+
     return [
       {
         id: "fallback-1",
@@ -175,8 +186,12 @@ export async function categorizeExpense(description: string): Promise<string> {
     ];
 
     return validCategories.includes(category || "") ? category! : "Other";
-  } catch (error) {
-    console.error("❌ Error categorizing expense:", error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("❌ Error categorizing expense:", error.message);
+    } else {
+      console.error("❌ Error categorizing expense:", error);
+    }
     return "Other";
   }
 }
@@ -222,8 +237,12 @@ export async function generateAIAnswer(
     if (!response) throw new Error("No response from AI");
 
     return response.trim();
-  } catch (error) {
-    console.error("❌ Error generating AI answer:", error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("❌ Error generating AI answer:", error.message);
+    } else {
+      console.error("❌ Error generating AI answer:", error);
+    }
     return "I'm unable to provide a detailed answer at the moment. Please try refreshing the insights or check your connection.";
   }
 }
