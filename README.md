@@ -53,5 +53,5 @@ npm run dev
 ## 📸 Screenshots  
 
 ### Dashboard  
-![Dashboard Screenshot](/screenshots/dashboard01.png)
-![Dashboard Screenshot](/screenshots/dashboard02.png)
+![Dashboard Screenshot](public/screenshots/dashboard01.png)
+![Dashboard Screenshot](public/screenshots/dashboard02.png)
