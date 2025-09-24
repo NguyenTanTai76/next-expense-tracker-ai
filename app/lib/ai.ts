@@ -40,12 +40,12 @@ async function createCompletionWithFallback(
       return completion;
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.error(`❌ Failed with model ${model}:`, {
+        console.error(`Failed with model ${model}:`, {
           message: error.message,
           stack: error.stack,
         });
       } else {
-        console.error(`❌ Failed with model ${model}:`, error);
+        console.error(`Failed with model ${model}:`, error);
       }
     }
   }
@@ -140,9 +140,9 @@ export async function generateExpenseInsights(
     }));
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error("❌ Error generating AI insights:", error.message);
+      console.error("Error generating AI insights:", error.message);
     } else {
-      console.error("❌ Error generating AI insights:", error);
+      console.error("Error generating AI insights:", error);
     }
 
     return [
